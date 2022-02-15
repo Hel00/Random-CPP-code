@@ -25,8 +25,8 @@ public:
 Angle::Angle(double decimalAngle)
 {
     double degrees,
-        minutes,
-        seconds;
+           minutes,
+           seconds;
 
     degrees = decimalAngle;
     degrees = (degrees - (int)degrees) * 60;

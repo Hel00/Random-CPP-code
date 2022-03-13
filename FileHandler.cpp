@@ -74,7 +74,6 @@ void FileHandler::close()
 /* TEST */
 
 /*
-
 int main(int argc, char const *argv[])
 {
   FileHandler file("C:\\Users\\dusan.popovic\\Documents\\CppWorkspace\\a.txt", "r+");
@@ -85,5 +84,4 @@ int main(int argc, char const *argv[])
 
   return 0;
 }
-
 */

@@ -20,9 +20,9 @@ public:
   static void Invert ( Node* node );
 };
 
-Node::Node( uint8_t data ) : data  (  data  ),
-                             left  ( nullptr),
-                             right ( nullptr) {}
+Node::Node( uint8_t data ) : data  (  data   ),
+                             left  ( nullptr ),
+                             right ( nullptr ) {}
 
 Node::Node( uint8_t data,
             Node*   left,

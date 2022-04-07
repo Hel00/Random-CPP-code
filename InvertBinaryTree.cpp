@@ -20,15 +20,15 @@ public:
   static void Invert ( Node* node );
 };
 
-Node::Node( uint8_t data ) : data  (  data   ),
-                             left  ( nullptr ),
-                             right ( nullptr ) {}
+Node::Node( uint8_t data ) : data  (  data  ),
+                             left  ( nullptr),
+                             right ( nullptr) {}
 
 Node::Node( uint8_t data,
             Node*   left,
-            Node*   right ) : data  ( data  ),
-                              left  ( left  ),
-                              right ( right ) {}
+            Node*   right) : data  ( data  ),
+                             left  ( left  ),
+                             right ( right ) {}
 
 Node::~Node() {}
 
@@ -36,10 +36,10 @@ void Node::Print( Node* node )
 {
   if ( node == NULL ) { return; }
 
-  printf( "%d ", node->data) ;
-
   Node::Print( node->left  );
   Node::Print( node->right );
+
+  printf( "%d ", node->data );
 }
 
 void Node::Invert( Node* node )
@@ -59,13 +59,27 @@ void Node::Invert( Node* node )
   }
 }
 
+/*
+         2
+        / \
+       /   \
+      1     4
+     / \   / \
+    7   9 3   5
+*/
+
 int main()
 {
-  Node* root               = new Node( 2 );
-	root->left         = new Node( 1 ); 
-	root->right        = new Node( 4 ); 
-	root->right->left  = new Node( 3 ); 
-	root->right->right = new Node( 5 ); 
+  Node* root         = new Node( 2 );
+
+  root->left         = new Node( 1 );
+  root->right        = new Node( 4 );
+
+  root->left->left   = new Node( 7 );
+  root->left->right  = new Node( 9 );
+
+  root->right->left  = new Node( 3 );
+  root->right->right = new Node( 5 );
 
   Node::Print( root );
 

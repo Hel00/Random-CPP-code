@@ -34,7 +34,7 @@ Node::~Node() {}
 
 void Node::Print( Node* node )
 {
-	if ( node == NULL ) { return; }
+  if ( node == NULL ) { return; }
 
   printf( "%d ", node->data) ;
 
@@ -50,8 +50,8 @@ void Node::Invert( Node* node )
   {
     Node* temp;
 
-		Node::Invert( node->left  ); 
-		Node::Invert( node->right );
+    Node::Invert( node->left  ); 
+    Node::Invert( node->right );
 
     temp        = node->left;
     node->left  = node->right;
@@ -61,7 +61,7 @@ void Node::Invert( Node* node )
 
 int main()
 {
-  Node* root         = new Node( 2 );
+  Node* root               = new Node( 2 );
 	root->left         = new Node( 1 ); 
 	root->right        = new Node( 4 ); 
 	root->right->left  = new Node( 3 ); 

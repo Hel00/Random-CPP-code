@@ -2,7 +2,7 @@
 #include <cstdio>
 
 template <typename T, int from, int to>
-consteval std::array<T, to - from> genRange()
+consteval auto genRange() -> std::array<T, to - from>
 {
   std::array<T, to - from> data{};
   int index = {from};
@@ -17,7 +17,7 @@ consteval std::array<T, to - from> genRange()
   return data;
 }
 
-int main()
+auto main() -> int
 {
   const char from = 'A',
              to   = 'Z';

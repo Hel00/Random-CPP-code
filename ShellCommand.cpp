@@ -4,23 +4,20 @@
 class ShellCommand
 {
 private:
-  FILE *pipe;
-  char output[1035];
-  const char* command;
+  FILE *pipe{};
+  char output[1035]{};
+  const char* command{};
 
 public:
-  ShellCommand();
-  ~ShellCommand();
+  ShellCommand() = default;
+  virtual ~ShellCommand() = default;
 
-  ShellCommand(const char* command);
+  explicit ShellCommand(const char* command);
   void set(const char* command);
   void execute();
-  const char* read();
+  auto read() -> const char*;
   void close();
 };
-
-ShellCommand::ShellCommand() {}
-ShellCommand::~ShellCommand() {}
 
 ShellCommand::ShellCommand(const char* command)
                           : command(command) {}
@@ -35,9 +32,9 @@ void ShellCommand::execute()
   this->pipe = popen(this->command, "r");
 }
 
-const char* ShellCommand::read()
+auto ShellCommand::read() -> const char*
 {
-  while (fgets(output, sizeof(output), this->pipe) != NULL)
+  while (fgets(output, sizeof(output), this->pipe) != nullptr)
   {
     return output;
   }
@@ -50,7 +47,7 @@ void ShellCommand::close()
   pclose(this->pipe);
 }
 
-int main( int argc, char *argv[] )
+auto main() -> int
 {
   ShellCommand command;
 

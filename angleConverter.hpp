@@ -44,8 +44,8 @@ Angle::Angle(double decimalAngle)
 double Angle::ToDec()
 {
     double degrees,
-          minutes,
-          seconds;
+           minutes,
+           seconds;
 
     seconds = seconds_m / 60.0;
     minutes = (minutes_m + seconds) / 60.0;

@@ -6,7 +6,7 @@ class FileHandler
 private:
   FILE* file;
   int CUR_SIZE;// = 4095;
-  char *content; //= (char*) malloc(sizeof(char) * CUR_SIZE); // allocate content.
+  char* content; //= (char*) malloc(sizeof(char) * CUR_SIZE); // allocate content.
   int length = 0;
 
 public:

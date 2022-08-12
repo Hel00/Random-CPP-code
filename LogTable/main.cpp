@@ -36,13 +36,16 @@ requires container< T >
 void logTable( T table )
 {
   int const tableSize = table.size();
-  int const tableDigitNum = numDigits( tableSize );
+  int tableDigitNum = 1; //numDigits( tableSize );
   static constinit int const maxDigit = numDigits( UINT_MAX );
 
   unsigned int index = 0;
   for ( const auto &item : table )
   {
     //std::cout << "Table at index " << index++ << " is " << item << '\n';
+
+    if ( index != 0 ) { tableDigitNum = numDigits( index ); }
+    if ( numDigits( index ) == 1 ) { tableDigitNum = 0; }
 
     std::cout << " ---------- \n"
               << '|';
@@ -52,9 +55,9 @@ void logTable( T table )
       std::cout << ' ';
     }
 
-    std::cout << index;
+    std::cout << index;/* << ' ' << tableDigitNum;*/
 
-    for ( int i = 0; i < (maxDigit - tableDigitNum) / 2; i++ )
+    for ( int i = 0; i < (maxDigit - numDigits( index )) / 2; i++ )
     {
       std::cout << ' ';
     }

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <vector>
 #include <string>
 #include <climits>
@@ -35,51 +36,30 @@ template< typename T >
 requires container< T >
 void logTable( T table )
 {
-  int const tableSize = table.size();
-  int tableDigitNum = 1; //numDigits( tableSize );
   static constinit int const maxDigit = numDigits( UINT_MAX );
 
   unsigned int index = 0;
   for ( const auto &item : table )
   {
-    //std::cout << "Table at index " << index++ << " is " << item << '\n';
-
-    if ( index != 0 ) { tableDigitNum = numDigits( index ); }
-    if ( numDigits( index ) == 1 ) { tableDigitNum = 0; }
-
-    std::cout << " ---------- \n"
+    std::cout << " ----------      ------------------------------\n"
               << '|';
 
-    for ( int i = 0; i < (maxDigit - tableDigitNum) / 2; i++ )
-    {
-      std::cout << ' ';
-    }
+    std::cout << std::setw( maxDigit ) << index;/* << ' ' << tableDigitNum;*/
 
-    std::cout << index;/* << ' ' << tableDigitNum;*/
-
-    for ( int i = 0; i < (maxDigit - numDigits( index )) / 2; i++ )
-    {
-      std::cout << ' ';
-    }
-
-    std::cout << '|' << '\n';
+    std::cout << "| -> |" << std::setw( maxDigit * 3 ) <<item << '|' << '\n';
 
     index++;
   }
-  std::cout << " ---------- " << std::endl;
-
-  std::cout << "Table size is " << tableSize << " and table digit number is " << tableDigitNum
-            << "\n(maxDigit - tableDigitNum) / 2 = " << (maxDigit - tableDigitNum) / 2 << '\n'
-            << " maxDigit - tableDigitNum      = " << maxDigit - tableDigitNum << std::endl;
+  std::cout << " ----------      ------------------------------ " << std::endl;
 }
 
 auto main() -> int
 {
-  std::vector<char> arr{};
+  std::vector<std::string> arr{};
 
-  for ( int i = 0; i <= 10; i++)
+  for ( int i = 0; i <= 100; i++)
   {
-    arr.push_back('A');
+    arr.push_back("Hello!");
   }
 
   logTable(arr);

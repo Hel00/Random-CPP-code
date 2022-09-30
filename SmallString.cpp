@@ -32,7 +32,7 @@ public:
 
     this->data = (const char*) std::realloc( (void*) this->data, sizeof(const char*) * combinedLength );
 
-    std::memmove( (char*) this->data, result, combinedLength );
+    std::strcpy( (char*) this->data, result );
   }
 };
 

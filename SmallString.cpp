@@ -23,15 +23,16 @@ public:
 
   void operator+=( const char *data )
   {
-    std::size_t resultLength = strlen( data );
-    char result[ this->length + resultLength ];
+    std::size_t combinedLength = this->length + strlen( data );
+
+    char result[ combinedLength ];
 
     std::strcat( result, this->data );
-    std::strcat( result, data );
+    std::strcat( result,       data );
 
-    this->data = (const char*) std::realloc( (void*) this->data, sizeof(const char*) + this->length + resultLength );
+    this->data = (const char*) std::realloc( (void*) this->data, sizeof(const char*) * combinedLength );
 
-    std::strcpy( (char*) this->data, result );
+    std::memmove( (char*) this->data, result, combinedLength );
   }
 };
 

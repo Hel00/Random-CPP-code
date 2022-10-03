@@ -52,7 +52,9 @@ public:
   {
     this->size /= 2;
     this->size = MAX( this->size, STRSIZE );
+
     this->data = (char*) std::realloc( (void*) this->data, this->size );
+
     this->data[ this->size - 1 ] = '\0';
   }
 

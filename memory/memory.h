@@ -9,12 +9,6 @@ class Memory
   static HANDLE handle;
   uint64_t address;
 
-  template< typename T >
-  T internalRead();
-
-  template< typename T >
-  void internalWrite( T );
-
 public:
   Memory( uint64_t address );
 
@@ -30,6 +24,10 @@ public:
 
   static void initializeTarget(const char *target);
 };
+
+
+// IMPLEMENTATION
+
 
 HANDLE Memory::handle{};
 

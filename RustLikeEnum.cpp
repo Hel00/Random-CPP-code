@@ -1,3 +1,5 @@
+// Also called "Tagged Unions"
+
 #include <iostream>
 
 using std::cout;

@@ -30,7 +30,7 @@ int main()
 template <typename T, typename U>
 concept SameAs = requires
 {
-  sameAs<T, U>;
+    sameAs<T, U>;
 };
 
 template<typename T>

@@ -24,3 +24,17 @@ int main()
 
     return 0;
 }
+
+// Expansion:
+
+template <typename T, typename U>
+concept SameAs = requires
+{
+  sameAs<T, U>;
+};
+
+template<typename T>
+concept AddableInt = requires (T a, T b)
+{
+    { a + b } -> SameAs<int>;
+};

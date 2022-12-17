@@ -34,6 +34,26 @@ asm
   )"
 );
 
+/* NASM */
+
+/*
+org 0x7C00
+bits 16
+
+start:
+  mov ah, 0eh
+  mov al, 'A'
+  mov bx, 0
+  int 0x10
+
+  jmp $
+
+times 510-($ - $$) db 0
+dw 0xAA55
+*/
+
+/* BINARY */
+
 /*
 00000000  B40E              mov ah,0xe
 00000002  B041              mov al,0x41

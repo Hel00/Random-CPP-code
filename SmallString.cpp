@@ -34,7 +34,7 @@ public:
 
     std::size_t oldSize = this->m_size;
 
-    while ( this->m_size < newSize ) { this->m_size *=2; }
+    while ( this->m_size < newSize ) { this->m_size *= 2; }
 
     this->m_data = static_cast< char* >( std::realloc(
                                        static_cast< void* >( this->m_data ),

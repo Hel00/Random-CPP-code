@@ -10,90 +10,90 @@ static constinit char const STRSIZE = 10;
 
 class String
 {
-  char       *data;
-  std::size_t size;
+  char       *m_data;
+  std::size_t m_size;
 
 public:
-  explicit String( const char *data ) : size( MAX( std::strlen( data ) + 1, STRSIZE ) )
+  explicit String( const char *data ) : m_size( MAX( std::strlen( data ) + 1, STRSIZE ) )
   {
-    this->data = static_cast< char* >( std::malloc( this->size ) );
+    this->m_data = static_cast< char* >( std::malloc( this->m_size ) );
 
-    std::strcpy( this->data, data );
+    std::strcpy( this->m_data, m_data );
   }
 
   void free()
   {
-    std::free( this->data );
+    std::free( this->m_data );
     std::free( this );
   }
 
   void grow( std::size_t newSize )
   {
-    if ( newSize <= this->size ) { return; }
+    if ( newSize <= this->m_size ) { return; }
 
-    std::size_t oldSize = this->size;
+    std::size_t oldSize = this->m_size;
 
-    while ( this->size < newSize ) { this->size *=2; }
+    while ( this->m_size < newSize ) { this->m_size *=2; }
 
-    this->data = static_cast< char* >( std::realloc(
-                                       static_cast< void* >( this->data ),
-                                       this->size ) );
+    this->m_data = static_cast< char* >( std::realloc(
+                                       static_cast< void* >( this->m_data ),
+                                       this->m_size ) );
 
-    std::memset( static_cast< void* >( this->data + oldSize ), '\0', this->size - oldSize );
+    std::memset( static_cast< void* >( this->m_data + oldSize ), '\0', this->m_size - oldSize );
   }
 
   void grow()
   {
-    this->grow( this->size * 2 );
+    this->grow( this->m_size * 2 );
   }
 
   void shrink()
   {
-    this->size /= 2;
-    this->size = MAX( this->size, STRSIZE );
+    this->m_size /= 2;
+    this->m_size = MAX( this->m_size, STRSIZE );
 
-    this->data = static_cast< char* >( std::realloc( static_cast< void* >( this->data ), this->size ) );
+    this->m_data = static_cast< char* >( std::realloc( static_cast< void* >( this->m_data ), this->m_size ) );
 
-    this->data[ this->size - 1 ] = '\0';
+    this->m_data[ this->m_size - 1 ] = '\0';
   }
 
   void append( const char *data )
   {
-    std::size_t length = std::strlen( this->data );
+    std::size_t length = std::strlen( this->m_data );
 
-    this->grow( this->size + length );
+    this->grow( this->m_size + length );
 
-    for ( std::size_t i = 0; i < std::strlen(data); i++ ) { this->data[ length + i ] = data[ i ]; }
+    for ( std::size_t i = 0; i < std::strlen(data); i++ ) { this->m_data[ length + i ] = data[ i ]; }
   }
 
   void append( char data )
   {
-    std::size_t length = std::strlen( this->data );
+    std::size_t length = std::strlen( this->m_data );
 
-    if ( length >= this->size - 1 ) { this->grow(); }
+    if ( length >= this->m_size - 1 ) { this->grow(); }
 
-    this->data[ length ] = data;
+    this->m_data[ length ] = data;
   }
 
-  auto get() -> char*
+  auto data() -> char*
   {
-    return this->data;
+    return this->m_data;
   }
 
   auto getChar( std::size_t index ) -> char
   {
-    if ( index >= this->size ) { return '\0'; }
+    if ( index >= this->m_size ) { return '\0'; }
 
-    return this->data[ index ];
+    return this->m_data[ index ];
   }
 
-  auto getSize()   -> std::size_t {        return this->size;         }
-  auto getLength() -> std::size_t { return std::strlen( this->data ); }
+  auto getSize()   -> std::size_t {         return this->m_size;          }
+  auto getLength() -> std::size_t { return std::strlen( this->m_data ); }
 
   void set( const char *data )
   {
-    this->grow( this->size + std::strlen( data ) );
-    std::strcpy( this->data, data );
+    this->grow( this->m_size + std::strlen( data ) );
+    std::strcpy( this->m_data, data );
   }
 
 };
@@ -108,7 +108,7 @@ auto main() -> int
   string.grow();
   string.append(" World!!");
 
-  printf("String is: %s", string.get());
+  printf("String is: %s", string.data());
 
   return 0;
 }

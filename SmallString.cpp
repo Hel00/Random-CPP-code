@@ -1,8 +1,3 @@
-/* Compile with */
-
-/* z++ -Oz -s main.cpp -c
-   z++ -Oz -s main.o */
-
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>

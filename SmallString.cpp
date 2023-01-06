@@ -6,7 +6,7 @@ constexpr auto MAX( std::size_t a, char b ) -> std::size_t
 {
   return ((a) > (b) ? (a) : (b));
 }
-static constinit char const STRSIZE = 10;
+constinit char const STRSIZE = 10;
 
 class String
 {

@@ -88,7 +88,7 @@ public:
     return this->m_data[ index ];
   }
 
-  auto getSize()   -> std::size_t {         return this->m_size;          }
+  auto getSize()   -> std::size_t {        return this->m_size;         }
   auto getLength() -> std::size_t { return std::strlen( this->m_data ); }
 
   void set( const char *data )

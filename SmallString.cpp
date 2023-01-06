@@ -3,23 +3,25 @@
 /* z++ -Oz -s main.cpp -c
    z++ -Oz -s main.o */
 
+#include <cstdio>
 #include <cstdlib>
 #include <cstring>
-#include <cstdio>
 
-#define MAX(a, b) ((a) > (b) ? (a) : (b))
-#define STRSIZE 10
+constexpr auto MAX( std::size_t a, char b ) -> std::size_t
+{
+  return ((a) > (b) ? (a) : (b));
+}
+static constinit char const STRSIZE = 10;
 
 class String
 {
-public:
   char       *data;
   std::size_t size;
 
-  String( char *data )
+public:
+  explicit String( const char *data ) : size( MAX( std::strlen( data ) + 1, STRSIZE ) )
   {
-    this->size = MAX( std::strlen( data ) + 1, STRSIZE );
-    this->data = (char*) std::malloc( this->size );
+    this->data = static_cast< char* >( std::malloc( this->size ) );
 
     std::strcpy( this->data, data );
   }
@@ -38,9 +40,11 @@ public:
 
     while ( this->size < newSize ) { this->size *=2; }
 
-    this->data = (char*) std::realloc( (void*) this->data, this->size );
+    this->data = static_cast< char* >( std::realloc(
+                                       static_cast< void* >( this->data ),
+                                       this->size ) );
 
-    std::memset( (void*)(this->data + oldSize), '\0', this->size - oldSize );
+    std::memset( static_cast< void* >( this->data + oldSize ), '\0', this->size - oldSize );
   }
 
   void grow()
@@ -53,18 +57,18 @@ public:
     this->size /= 2;
     this->size = MAX( this->size, STRSIZE );
 
-    this->data = (char*) std::realloc( (void*) this->data, this->size );
+    this->data = static_cast< char* >( std::realloc( static_cast< void* >( this->data ), this->size ) );
 
     this->data[ this->size - 1 ] = '\0';
   }
 
-  void append( char *data )
+  void append( const char *data )
   {
     std::size_t length = std::strlen( this->data );
 
     this->grow( this->size + length );
 
-    for ( int i = 0; i < std::strlen(data); i++ ) { this->data[ length + i ] = data[ i ]; }
+    for ( std::size_t i = 0; i < std::strlen(data); i++ ) { this->data[ length + i ] = data[ i ]; }
   }
 
   void append( char data )
@@ -76,22 +80,22 @@ public:
     this->data[ length ] = data;
   }
 
-  char *get()
+  auto get() -> char*
   {
     return this->data;
   }
 
-  char getChar( std::size_t index )
+  auto getChar( std::size_t index ) -> char
   {
     if ( index >= this->size ) { return '\0'; }
 
     return this->data[ index ];
   }
 
-  std::size_t getSize()   { return this->size; }
-  std::size_t getLength() { return std::strlen( this->data ); }
+  auto getSize()   -> std::size_t {        return this->size;         }
+  auto getLength() -> std::size_t { return std::strlen( this->data ); }
 
-  void set( char *data )
+  void set( const char *data )
   {
     this->grow( this->size + std::strlen( data ) );
     std::strcpy( this->data, data );
@@ -99,10 +103,9 @@ public:
 
 };
 
-
-int main()
+auto main() -> int
 {
-  String string = "Hey";
+  String string("Hey");
 
   string.grow();
   string.set("Hello");

@@ -2,10 +2,11 @@
 #include <cstdlib>
 #include <cstring>
 
-constexpr auto MAX( std::size_t a, char b ) -> std::size_t
+constexpr inline auto MAX( std::size_t a, char b ) -> std::size_t
 {
   return ((a) > (b) ? (a) : (b));
 }
+
 constinit char const STRSIZE = 10;
 
 class String

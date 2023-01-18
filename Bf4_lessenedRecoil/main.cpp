@@ -10,7 +10,7 @@ template< size_t size = 0 >
 uint64_t readMemory( const HANDLE &handle, const std::array<uint64_t, size> &address )
 {
   uint64_t buffer = 0;
-  const std::size_t bufferSize = 4;
+  static constexpr std::size_t bufferSize = 4;
 
   for ( const uint64_t &offset : address )
   {
@@ -22,7 +22,7 @@ uint64_t readMemory( const HANDLE &handle, const std::array<uint64_t, size> &add
 
 void writeMemory( const HANDLE &handle, const uint64_t address, const uint64_t value )
 {
-  static constinit size_t const valueSize = 4;
+  static constexpr size_t valueSize = 4;
 
   WriteProcessMemory( handle, (LPVOID) address, &value, valueSize, 0 );
 }
@@ -30,21 +30,19 @@ void writeMemory( const HANDLE &handle, const uint64_t address, const uint64_t v
 int main()
 {
   DWORD processId;
-  const char *processName = "Battlefield 4";
-  const auto delay = 5s;
+  static constexpr const char *processName = "Battlefield 4";
+  static constexpr auto delay = 10s;
 
   HWND processHwnd = FindWindow(0, processName);
   GetWindowThreadProcessId(processHwnd, &processId);
   HANDLE processHandle = OpenProcess(PROCESS_ALL_ACCESS, false, processId);
 
-  std::array addressList = {
+  static constexpr std::array addressList = {
     std::array< uint64_t, 3 > { 0x1423B2EC8ull, 0x128, 0x30 },
     std::array< uint64_t, 3 > { 0x1423B2EC8, 0x128, 0x30 },
     std::array< uint64_t, 3 > { 0x1423B2EC8, 0x128, 0x30 },
     std::array< uint64_t, 3 > { 0x1423B2EC8, 0x128, 0x30 },
   };
-
-  static constinit std::array const lessenedRecoil = { 0x00, 0x00, 0x00, 0x3F };
 
   while( true )
   {

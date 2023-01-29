@@ -32,7 +32,8 @@ void *alloc( size size )
   return result;
 }
 
-int main() {
+int main()
+{
   int *pointer = (int*) alloc( sizeof( int ) );
   *pointer = 123;
 

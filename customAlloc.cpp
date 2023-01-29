@@ -21,8 +21,8 @@ void *systemBreak( intptr increment )
 
 void* alloc( size size )
 {
-  void* result = systemBreak( 0 );
-  void* request = systemBreak( size );
+  void *result = systemBreak( 0 );
+  void *request = systemBreak( size );
 
   if ( request == (void*) - 1 )
   {
@@ -33,7 +33,7 @@ void* alloc( size size )
 }
 
 int main() {
-  int* pointer = (int*) alloc( sizeof( int ) );
+  int *pointer = (int*) alloc( sizeof( int ) );
   *pointer = 123;
 
   //printf( " pointer = %x\n",  pointer );

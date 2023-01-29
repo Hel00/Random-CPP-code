@@ -19,7 +19,7 @@ void *systemBreak( intptr increment )
   return previousHeapEnd;
 }
 
-void* alloc( size size )
+void *alloc( size size )
 {
   void *result = systemBreak( 0 );
   void *request = systemBreak( size );

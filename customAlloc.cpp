@@ -24,7 +24,7 @@ void *alloc( size size )
   void *result = systemBreak( 0 );
   void *request = systemBreak( size );
 
-  if ( request == (void*) - 1 )
+  if ( request == (void*) -1 )
   {
     return nullptr;
   }

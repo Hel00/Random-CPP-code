@@ -3,7 +3,7 @@
 using size = long long int;
 using intptr = long long int;
 
-extern char end asm("end");
+extern char end asm("end"); // `_environ` on windows
 
 void *systemBreak( intptr increment )
 {

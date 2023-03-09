@@ -26,9 +26,9 @@ Node::Node( uint8_t data ) : data  (  data   ),
 
 Node::Node( uint8_t data,
             Node*   left,
-            Node*   right) : data  ( data  ),
-                             left  ( left  ),
-                             right ( right ) {}
+            Node*   right ) : data  ( data  ),
+                              left  ( left  ),
+                              right ( right ) {}
 
 Node::~Node() {}
 

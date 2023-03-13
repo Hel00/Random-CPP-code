@@ -1,0 +1,3 @@
+To get modules to work you need to specify a target (eg. `--target=x86_64-linux`)
+
+IMPORTANT. `main.cpp` needs `//module;` in the first line, yes as a comment

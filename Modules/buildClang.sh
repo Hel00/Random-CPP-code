@@ -3,4 +3,7 @@ clang++ -std=c++20 -fmodules -fbuiltin-module-map -c moduleTest.cpp
 clang++ -std=c++20 -fmodules -fbuiltin-module-map -fprebuilt-module-path=. -c main.cpp -o main.o
 clang++ -std=c++20 -fmodules -fbuiltin-module-map main.o moduleTest.o -o main
 
+# Or relpace `clang++ -std=c++20 -fmodules -fbuiltin-module-map main.o moduleTest.o -o main` with below if you wanna use zig
+# #z++ -std=c++20 -fmodules -fbuiltin-module-map main.o moduleTest.o -o main
+
 #-stdlib=libc++

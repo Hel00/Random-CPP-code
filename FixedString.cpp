@@ -43,25 +43,23 @@ public:
 
     return inverted_string;
   }
+  consteval auto replaceAndFill() const
+  {
+    FixedString<stream.size + 10> temp{};
+
+    for (int index = 0; index <= stream.size; index++)
+    {
+      temp[index] = stream[index];
+    }
+
+    for (int index = stream.size; index < stream.size + 10; index++)
+    {
+      temp[index] = 'A';
+    }
+
+    return temp;
+  }
 };
-
-template<FixedString stream>
-consteval auto replaceAndFill()
-{
-  FixedString<stream.size + 10> temp{};
-
-  for (int index = 0; index <= stream.size; index++)
-  {
-    temp[index] = stream[index];
-  }
-
-  for (int index = stream.size; index < stream.size + 10; index++)
-  {
-    temp[index] = 'A';
-  }
-
-  return temp;
-}
 
 #include <iostream>
 
@@ -76,7 +74,7 @@ int main()
 
   cout << "Inverted `FixedString` is: " << invertedStream << endl;
 
-  static constexpr auto replaced = replaceAndFill<invertedStream>();
+  static constexpr auto replaced = fixedStringManager.replaceAndFill();
 
   cout << "Replaced and filled `FixedString` is: " << replaced << endl;
 }

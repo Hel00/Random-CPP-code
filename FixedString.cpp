@@ -9,7 +9,17 @@ struct FixedString
     for (unsigned index = 0; index != SIZE; ++index) { buffer[index] = stream[index]; }
   }
 
+  consteval FixedString()
+  {
+    for (unsigned index = 0; index != SIZE; ++index) { buffer[index] = '\0'; }
+  }
+
   consteval operator char const*() const { return buffer; }
+
+  consteval char &operator[](unsigned index)
+  {
+    return this->buffer[index];
+  }
 };
 
 template<unsigned N>
@@ -35,6 +45,24 @@ public:
   }
 };
 
+template<FixedString stream>
+consteval auto replaceAndFill()
+{
+  FixedString<stream.size + 10> temp{};
+
+  for (int i = 0; i <= stream.size; i++)
+  {
+    temp[i] = stream[i];
+  }
+
+  for (int i = stream.size; i < stream.size + 10; i++)
+  {
+    temp[i] = 'A';
+  }
+
+  return temp;
+}
+
 #include <iostream>
 
 using std::cout;
@@ -46,5 +74,9 @@ int main()
 
   static constexpr auto invertedStream = fixedStringManager.Invert();
 
-  cout << "Thing is: " << invertedStream << endl;
+  cout << "Inverted `FixedString` is: " << invertedStream << endl;
+
+  static constexpr auto replaced = replaceAndFill<invertedStream>();
+
+  cout << "Replaced and filled `FixedString` is: " << replaced << endl;
 }

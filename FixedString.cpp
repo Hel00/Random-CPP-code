@@ -50,14 +50,14 @@ consteval auto replaceAndFill()
 {
   FixedString<stream.size + 10> temp{};
 
-  for (int i = 0; i <= stream.size; i++)
+  for (int index = 0; index <= stream.size; index++)
   {
-    temp[i] = stream[i];
+    temp[index] = stream[index];
   }
 
-  for (int i = stream.size; i < stream.size + 10; i++)
+  for (int index = stream.size; index < stream.size + 10; index++)
   {
-    temp[i] = 'A';
+    temp[index] = 'A';
   }
 
   return temp;

@@ -1,86 +1,47 @@
-const double ANGLE_PI = 3.14159265358979323846264338327950288419716939937510;
-
 class Angle
 {
-private:
-
 public:
-    int degrees_m,
-        minutes_m,
-        seconds_m;
-    Angle( int degrees,
-           int minutes,
-           int seconds )
-           : degrees_m(degrees),
-             minutes_m(minutes),
-             seconds_m(seconds) {}
+  char degrees;
+  char minutes;
+  char seconds;
 
-    Angle(double decimalAngle);
+  constexpr Angle(char degrees, char minutes, char seconds)
+  {
+    this->degrees = degrees;
+    this->minutes = minutes;
+    this->seconds = seconds;
+  }
 
-    ~Angle() {}
+  constexpr Angle(double data)
+  {
+    this->degrees = char(data);
+    this->minutes = char((data - degrees) * 60.0);
+    this->seconds = (data - degrees - minutes / 60.0) * 3600.0;
+  }
 
-    double ToDec();
+  constexpr double toRadian()
+  {
+    return degrees + (minutes / 60.0) + (seconds / 3600.0);
+  }
 };
 
-Angle::Angle(double decimalAngle)
-{
-    double degrees,
-           minutes,
-           seconds;
+#include <iostream>
 
-    degrees = decimalAngle;
-    degrees = (degrees - (int)degrees) * 60;
-    degrees_m = (int)degrees;
-
-    minutes = degrees;
-    minutes = (degrees - (int)minutes) * 60;
-    minutes_m = (int)minutes;
-
-    seconds = minutes;
-    seconds = (minutes - (int)seconds) * 60.0;
-    seconds_m = (int)seconds;
-}
-
-double Angle::ToDec()
-{
-    double degrees,
-           minutes,
-           seconds;
-
-    seconds = seconds_m / 60.0;
-    minutes = (minutes_m + seconds) / 60.0;
-    degrees = degrees_m + minutes;
-
-    return degrees;
-}
-
-/* TEST */
-
-/*
-#ifdef debug
-
-    #include <iostream>
-    #define dbgOut std::cout
-
-#else
-
-    #define dbgOut
-
-#endif
-
-#include "angleConverter.hpp"
+using std::cout;
+using std::endl;
 
 int main()
 {
-    Angle angleA(20, 13, 11);
-    Angle angleB(1.337);
+  Angle inRadian(1.337);
+  Angle inDegrees(20, 13, 11);
 
-    dbgOut << angleA.ToDec()
-           << std::endl;
+  cout << "From radian to degrees: "
+       << (int) inRadian.degrees << ' '
+       << (int) inRadian.minutes << ' '
+       << (int) inRadian.seconds << ' '
+       << endl;
 
-    dbgOut << angleB.degrees_m << " "
-           << angleB.minutes_m << " "
-           << angleB.seconds_m << " "
-           << std::endl;
+  cout << "From degrees to radian: "
+       << inDegrees.toRadian()
+       << endl;
 }
-*/

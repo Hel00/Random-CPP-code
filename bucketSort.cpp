@@ -42,6 +42,7 @@ int main()
   {
     std::cout << element << ' ';
   }
+
   std::cout << std::endl;
 
   return 0;

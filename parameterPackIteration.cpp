@@ -5,8 +5,7 @@ void Foo (Ts && ... inputs)
 
     ([&]
     {
-        // Do things in your "loop" lambda
-
+        //inputs; // if lambda empty you need this line to make it work
         ++i;
         std::cout << "input " << i << " = " << inputs << std::endl;
 

@@ -1,7 +1,7 @@
 template<typename T>
 struct add_rvalue_reference
 {
-    using type = T&&;
+    using type = T;
 };
 
 template<typename T>

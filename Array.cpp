@@ -46,6 +46,9 @@ public:
   template<typename... Args>
   constexpr array(Args... args) : data{args...} {}
 
+  constexpr Type *begin() const {    return (Type*)this->data;     }
+  constexpr Type *end() const   { return (Type*)this->data + SIZE; }
+
 private:
   const SIZE_T size = SIZE;
 };

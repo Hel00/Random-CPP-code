@@ -1,12 +1,41 @@
+template<typename T>
+struct add_rvalue_reference
+{
+    using type = T&&;
+};
+
+template<typename T>
+using add_rvalue_reference_t = typename add_rvalue_reference<T>::type;
+
+template<typename T>
+add_rvalue_reference_t<T> declval() noexcept;
+
+template<typename... Args>
+struct CommonType;
+
+template<typename T>
+struct CommonType<T>
+{
+    using Type = T;
+};
+
+template<typename T, typename... Args>
+struct CommonType<T, Args...>
+{
+    using Type = decltype(true ? declval<T>() : declval<typename CommonType<Args...>::Type>());
+};
+
+template<typename... Args>
+using CommonType_t = typename CommonType<Args...>::Type;
+
 template<typename Type, SIZE_T SIZE>
-class Array
+class array
 {
 public:
   Type data[SIZE]{};
-  const SIZE_T size = SIZE;
 
-  constexpr Array(){}
-  constexpr Array(Type data[SIZE])
+  constexpr array(){}
+  constexpr array(Type data[SIZE])
   {
     for (unsigned index = 0; index <= SIZE; index++)
     {
@@ -15,8 +44,14 @@ public:
   }
 
   template<typename... Args>
-  constexpr Array(Args... args) : data{args...} {}
+  constexpr array(Args... args) : data{args...} {}
+
+private:
+  const SIZE_T size = SIZE;
 };
 
 template<typename Type, SIZE_T SIZE>
-Array(Type (&)[SIZE]) -> array<Type, SIZE>;
+array(Type (&)[SIZE]) -> array<Type, SIZE>;
+
+template<typename... Args>
+array(Args...) -> array<CommonType_t<Args...>, sizeof...(Args)>;

@@ -8,7 +8,7 @@ extern "C" void Main()
 {
   static constexpr const char *processName = "Battlefield 4";
   static constexpr auto PROCESS_ALL_ACCESS = (0x000F0000L | 0x00100000L | 0xFFF); // 2035711
-  static constexpr auto delay = 10;
+  static constexpr auto delay = 10'000;
   static constexpr auto recoil = 0x3F59999A;
 
   DWORD processId;

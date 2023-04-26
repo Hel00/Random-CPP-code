@@ -19,7 +19,8 @@ int main()
 {
   Module module { .data = 1 };
 
-  // Module::INT typeTest = 1; // Error
+  // Module::Int typeTest = 1; // Error
+  // Type::Int typeTest = 1; // Error
 
   cout << module.data << endl;
 }

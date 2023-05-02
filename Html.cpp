@@ -34,6 +34,25 @@ using CommonType_t = typename CommonType<Args...>::Type;
 
 struct Element {};
 
+template<size_t SIZE>
+struct P : Element
+{
+  char buffer[SIZE + 1]{};
+
+  constexpr P(char const *stream)
+  {
+    for (unsigned index = 0; index != SIZE; ++index) { buffer[index] = stream[index]; }
+  }
+
+  constexpr P()
+  {
+    for (unsigned index = 0; index != SIZE; ++index) { buffer[index] = '\0'; }
+  }
+};
+
+template<unsigned N>
+P(char const (&)[N]) -> P<N - 1>;
+
 template<typename, size_t SIZE>
 class Html
 {
@@ -41,6 +60,7 @@ public:
   Element data[SIZE]{};
 
   constexpr Html(){}
+
   constexpr Html(Element data[SIZE])
   {
     for (unsigned index = 0; index <= SIZE; index++)
@@ -67,5 +87,5 @@ Html(Args...) -> Html<CommonType_t<Args...>, sizeof...(Args)>;
 
 int main()
 {
-  Html h{ Element{}, Element{}, Element{} };
+  Html h{ Element{}, Element{}, P{"Paragraph"}, Element{} };
 }

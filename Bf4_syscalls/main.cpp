@@ -4,6 +4,9 @@
 #include "win32Utils.hpp"
 #include "memory.hpp"
 
+// 0.75 = 0x3F400000
+// 0.85 = 0x3F59999A
+
 extern "C" void Main()
 {
   static constexpr const char *processName = "Battlefield 4";

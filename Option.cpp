@@ -1,3 +1,8 @@
+#include <iostream>
+
+using std::cout;
+using std::endl;
+
 template<typename T>
 struct Option
 {
@@ -17,16 +22,24 @@ struct Option<void>
   constexpr bool hasValue() const { return false; }
 };
 
-template<typename T>
 constexpr Option<void> None() { return Option<void>(); }
 
 template<typename T>
 constexpr Option<T> Some(const T value) { return Option<T>(value); }
 
+template<typename ...Type>
+void process(Option<Type> ...options)
+{
+  ([&]
+  {
+    std::cout << options.hasValue() << std::endl;
+  } (), ...);
+}
+
 int main()
 {
-  static constexpr Option x = Some(42);
-  static constexpr auto result = x.hasValue();
+  static constexpr Option optionSome = Some(42);
+  static constexpr Option optionNone = None();
 
-  return result;
+  process(optionSome, optionNone);
 }

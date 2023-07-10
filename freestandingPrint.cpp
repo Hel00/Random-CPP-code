@@ -1,5 +1,6 @@
 // zig build-exe -O ReleaseSmall -ffunction-sections --gc-sections --entry Main freestandingPrint.cpp
 // z++ -eMain --target=x86_64-freestanding-none -Oz -s -ffunction-sections freestandingPrint.cpp
+// clang++ -std=c++20 -Oz -s -eMain -fuse-ld=lld --target=x86_64-freestanding-none -fPIC -nostdinc -nostartfiles -ffunction-sections -fdata-sections -Wl,--gc-sections -static freestandingPrint.cpp
 
 using size_t = long long int;
 

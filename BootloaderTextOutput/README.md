@@ -2,4 +2,5 @@
   The purpose of this project is understanding how the bootloader of a personal computer works.
 
   Filesystem: elf32
+  
   Architecture: i386 / x86

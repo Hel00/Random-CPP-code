@@ -12,6 +12,7 @@ struct Option
   constexpr Option(const T &&value) : data(value) {}
 
   constexpr bool hasValue() const { return true; }
+  constexpr T getData() const { return data; }
 };
 
 template<>
@@ -20,6 +21,7 @@ struct Option<void>
   constexpr Option() {}
 
   constexpr bool hasValue() const { return false; }
+  constexpr bool getData() const { return false; }
 };
 
 constexpr Option<void> None() { return Option<void>(); }
@@ -28,11 +30,17 @@ template<typename T>
 constexpr Option<T> Some(const T value) { return Option<T>(value); }
 
 template<typename ...Type>
-void process(Option<Type> ...options)
+constexpr void process(Option<Type> ...options)
 {
   ([&]
   {
-    std::cout << options.hasValue() << std::endl;
+
+    if constexpr ( options.hasValue() == true )
+    {
+      std::cout << options.getData() << std::endl;
+    }
+    else {}
+
   } (), ...);
 }
 

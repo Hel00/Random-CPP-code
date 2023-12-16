@@ -13,9 +13,17 @@ target_sources(foo
       foo.cxx
 )
 
+add_library(bar)
+
+target_sources(bar
+  PUBLIC
+    FILE_SET CXX_MODULES FILES
+      bar.cxx
+)
+
 add_executable(moduleTest main.cpp)
 
-target_link_libraries(moduleTest foo)
+target_link_libraries(moduleTest foo bar)
 
 include(GNUInstallDirs)
 install(TARGETS moduleTest

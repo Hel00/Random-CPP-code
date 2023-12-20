@@ -1,3 +1,21 @@
+template<unsigned long long N>
+__attribute__((always_inline)) constexpr void test()
+{
+  asm("nop");
+  test<N - 1>();
+}
+
+template<>
+__attribute__((always_inline)) constexpr void test<0>()
+{}
+
+int main()
+{
+  test<3>();
+}
+
+/* OR THIS */
+
 template <int First, int Last>
 struct static_for
 {

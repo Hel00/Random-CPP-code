@@ -10,9 +10,8 @@ extern uint8_t data_end[] asm("_binary_data_end");
 
 int main()
 {
-    for (int i = 0; i < 10; i++)
-    {
-        printf("%c\n", data[i]);
-    }
+  for (uint8_t *ptr = data; ptr < data_end; ptr++)
+  {
+    printf("%c\n", *ptr);
+  }
 }
-

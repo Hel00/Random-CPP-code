@@ -35,10 +35,16 @@ constexpr T&& forward(typename removeReference<T>::type&& arg) noexcept
     return static_cast<T&&>(arg);
 }
 
+template <typename T>
+constexpr T&& _move(T &arg) noexcept
+{
+    return static_cast<T&&>(arg);
+}
+
 template <typename T, typename U = T>
 constexpr T exchange(T& obj, U&& new_value)
 {
-    T old_value = move(obj);
+    T old_value = _move(obj);
     obj = forward<U>(new_value);
     return old_value;
 }

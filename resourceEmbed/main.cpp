@@ -21,7 +21,7 @@ auto main(int argc, char *argv[]) -> int
 
   std::string buffer;
 
-  buffer += "static constexpr char embedded_" + fileName + "[]={";
+  buffer += "static constexpr char embed_" + fileName + "[]={";
 
   unsigned long long size = 0;
 
@@ -41,11 +41,12 @@ auto main(int argc, char *argv[]) -> int
 
   buffer += "};\n";
 
-  buffer += "static constexpr unsigned long long embedded_" + fileName + "_size=";
+  buffer += "static constexpr unsigned long long embed_" + fileName + "_size=";
   buffer += std::to_string(size);
   buffer += ';';
 
-  data = buffer;
+  data = "#pragma once\n";
+  data += buffer;
 
   std::ofstream embedded(std::string(currentPath + '/' + fileName + ".h"));
   embedded << data;

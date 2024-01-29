@@ -86,7 +86,6 @@ template<typename T>
 Option(T data) -> Option<T>;
 Option() -> Option<void>;
 
-
 template<typename ...Type>
 constexpr void process(Option<Type> ...options)
 {

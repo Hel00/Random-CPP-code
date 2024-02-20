@@ -51,5 +51,6 @@ add_executable(main
 
 target_sources(main
 PUBLIC FILE_SET modules TYPE CXX_MODULES FILES
-  some_module.cpp
+  foo.cxx
+  bar.cxx
 )

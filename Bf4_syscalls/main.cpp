@@ -1,4 +1,4 @@
-// zig build-exe -target xGameplay/Weapons/AK5C/AK5Cows-none -L"/home/hel/.wine/drive_c/windows/system32/" -dynamic -lkernel32 -luser32 -cflags --std=c++20 -- --subsystem windows -fentry=Main -O ReleaseSmall -fstrip -flto --gc-sections -ffunction-sections main.cpp
+// zig build-exe -target x86_64-windows-none -L"/home/hel/.wine/drive_c/windows/system32/" -dynamic -lkernel32 -luser32 -cflags --std=c++20 -- --subsystem windows -fentry=Main -O ReleaseSmall -fstrip -flto --gc-sections -ffunction-sections main.cpp
 
 // z++ -Oz -s main.cpp --target=x86_64-windows-gnu -L"/home/hel/.wine/drive_c/windows/system32/" -dynamic -lkernel32 -luser32 -o main.exe
 
@@ -38,10 +38,10 @@ extern "C" void Main()
   static constexpr array<uint64_t, 4> weaponNameLocation{0x1423B2EC8ull, 0x138ull, 0x1D0ull, 0x10ull};
   static constexpr array<uint64_t, 3> ak5cRofLocation{0x1423B2EC8ull, 0x128ull, 0x10ull};
 
-  while( true )
+  while (true)
   {
-    unlockEverything = readMemory( processHandle, 0x1423717C0 ) + 0x54;
-    writeMemory( processHandle, unlockEverything, 1 );
+    unlockEverything = readMemory(processHandle, 0x1423717C0) + 0x54;
+    writeMemory(processHandle, unlockEverything, 1);
 
     swayBase = readMemory(processHandle, swayLocation) + 0x30ull;
 
@@ -53,11 +53,11 @@ extern "C" void Main()
     auto weaponNameAddress = readMemory(processHandle, weaponNameLocation) + 0x00;
     auto weaponName = readString<AK5C_PATH_SIZE>(processHandle, weaponNameAddress);
 
-    writeMemory( processHandle, sightRecoil, recoil );
-    writeMemory( processHandle, sightSpread, recoil );
+    writeMemory(processHandle, sightRecoil, recoil);
+    writeMemory(processHandle, sightSpread, recoil);
 
-    writeMemory( processHandle, hipRecoil, recoil );
-    writeMemory( processHandle, hipSpread, recoil );
+    writeMemory(processHandle, hipRecoil, recoil);
+    writeMemory(processHandle, hipSpread, recoil);
     
     if (!__builtin_strcmp(AK5C_PATH, weaponName.data))
     {

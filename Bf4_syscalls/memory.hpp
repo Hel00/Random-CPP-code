@@ -3,39 +3,39 @@
 #include "types.hpp"
 #include "win32Utils.hpp"
 
-template< SIZE_T SIZE = 0 >
-uint64_t readMemory( const HANDLE &handle, const array<uint64_t, SIZE> &address )
+template<SIZE_T SIZE = 0>
+uint64_t readMemory(const HANDLE &handle, const array<uint64_t, SIZE> &address)
 {
   uint64_t buffer = 0;
   static constexpr SIZE_T bufferSize = 4;
 
-  for ( const uint64_t &offset : address )
+  for (const uint64_t &offset : address)
   {
-    ReadProcessMemory( handle, (LPCVOID) (buffer + offset), &buffer, bufferSize, 0 );
+    ReadProcessMemory(handle, (LPCVOID) (buffer + offset), &buffer, bufferSize, 0);
   }
 
   return buffer;
 }
 
-uint64_t readMemory( const HANDLE &handle, const uint64_t address )
+uint64_t readMemory(const HANDLE &handle, const uint64_t address)
 {
   uint64_t buffer = 0;
   static constexpr SIZE_T bufferSize = 4;
 
-  ReadProcessMemory( handle, (LPCVOID) (buffer + address), &buffer, bufferSize, 0 );
+  ReadProcessMemory(handle, (LPCVOID) (buffer + address), &buffer, bufferSize, 0);
 
   return buffer;
 }
 
-void writeMemory( const HANDLE &handle, const uint64_t address, const uint64_t value )
+void writeMemory(const HANDLE &handle, const uint64_t address, const uint64_t value)
 {
   static constexpr SIZE_T valueSize = 4;
 
-  WriteProcessMemory( handle, (LPVOID) address, &value, valueSize, 0 );
+  WriteProcessMemory( handle, (LPVOID) address, &value, valueSize, 0);
 }
 
 template<__SIZE_TYPE__ SIZE>
-auto readString( const HANDLE &handle, const uint64_t address )
+auto readString(const HANDLE &handle, const uint64_t address)
 {
   struct Result
   {
@@ -56,16 +56,3 @@ auto readString( const HANDLE &handle, const uint64_t address )
 
   return result;
 }
-
-/*
-        int smem = 0x28fe90;
-     
-        char * buff = new char[128];
-     
-        for( int i=0;i<129;++i)
-        {
-            ReadProcessMemory(hProcess, (LPCVOID)smem, &buff[i], 32, NULL);
-     
-        }
-        cout<<"whats here"<<buff<<endl;
-*/

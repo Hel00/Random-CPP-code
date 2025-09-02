@@ -2,6 +2,9 @@
 
 // z++ -Oz -s main.cpp --target=x86_64-windows-gnu -L"/home/hel/.wine/drive_c/windows/system32/" -dynamic -lkernel32 -luser32 -o main.exe
 
+// after zig 0.15.1
+// z++ -Oz -s main.cpp --target=x86_64-windows-gnu -L"/home/hel/.wine/drive_c/windows/system32/" -dynamic -lkernel32 -luser32 -nostdlib -nostartfiles -ffreestanding -o main.exe 
+
 #include "types.hpp"
 #include "win32Utils.hpp"
 #include "memory.hpp"

@@ -14,7 +14,7 @@ add_executable(main main.cpp)
 include_directories(${LLVM_INCLUDE_DIRS})
 add_definitions(${LLVM_DEFINITIONS})
 
-target_link_libraries(tiny
+target_link_libraries(main
   PRIVATE
     LLVMAsmParser
     LLVMSupport

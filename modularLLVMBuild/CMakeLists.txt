@@ -3,7 +3,7 @@ project(TinyAsmParser LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 23)
 
-set(LLVM_DIR "/home/hel/Documents/Dev/llvm-project/test/lib/cmake/llvm")
+set(LLVM_DIR "/home/hel/Documents/Dev/llvm-project/build/lib/cmake/llvm")
 find_package(LLVM REQUIRED CONFIG)
 
 message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}")
